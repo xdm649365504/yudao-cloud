@@ -7,7 +7,7 @@ spring:
   datasource:
     druid: # Druid 【监控】相关的全局配置
       web-stat-filter:
-        enabled: true
+        enabled: true #sad撒所大多
       stat-view-servlet:
         enabled: true
         allow: # 设置白名单，不填则允许所有访问
