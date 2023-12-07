@@ -12,10 +12,12 @@ import cn.iocoder.yudao.framework.pay.core.client.dto.order.PayOrderRespDTO;
 import cn.iocoder.yudao.framework.pay.core.client.dto.order.PayOrderUnifiedReqDTO;
 import cn.iocoder.yudao.framework.pay.core.client.dto.refund.PayRefundRespDTO;
 import cn.iocoder.yudao.framework.pay.core.client.dto.refund.PayRefundUnifiedReqDTO;
+import cn.iocoder.yudao.framework.pay.core.client.dto.transfer.PayTransferRespDTO;
+import cn.iocoder.yudao.framework.pay.core.client.dto.transfer.PayTransferUnifiedReqDTO;
 import cn.iocoder.yudao.framework.pay.core.client.impl.AbstractPayClient;
 import cn.iocoder.yudao.framework.pay.core.enums.order.PayOrderStatusRespEnum;
+import com.github.binarywang.wxpay.bean.notify.WxPayNotifyV3Result;
 import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
-import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyV3Result;
 import com.github.binarywang.wxpay.bean.notify.WxPayRefundNotifyResult;
 import com.github.binarywang.wxpay.bean.notify.WxPayRefundNotifyV3Result;
 import com.github.binarywang.wxpay.bean.request.*;
@@ -173,8 +175,8 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
 
     private PayOrderRespDTO doParseOrderNotifyV3(String body) throws WxPayException {
         // 1. 解析回调
-        WxPayOrderNotifyV3Result response = client.parseOrderNotifyV3Result(body, null);
-        WxPayOrderNotifyV3Result.DecryptNotifyResult result = response.getResult();
+        WxPayNotifyV3Result response = client.parseOrderNotifyV3Result(body, null);
+        WxPayNotifyV3Result.DecryptNotifyResult result = response.getResult();
         // 2. 构建结果
         Integer status = parseStatus(result.getTradeState());
         String openid = result.getPayer() != null ? result.getPayer().getOpenid() : null;
@@ -425,6 +427,10 @@ public abstract class AbstractWxPayClient extends AbstractPayClient<WxPayClientC
         }
     }
 
+    @Override
+    protected PayTransferRespDTO doUnifiedTransfer(PayTransferUnifiedReqDTO reqDTO) {
+       throw new UnsupportedOperationException("待实现");
+    }
     // ========== 各种工具方法 ==========
 
     static String formatDateV2(LocalDateTime time) {

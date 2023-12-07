@@ -4,6 +4,7 @@ spring:
   autoconfigure:
     exclude:
       - com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure # 排除 Druid 的自动配置，使用 dynamic-datasource-spring-boot-starter 配置多数据源
+      - de.codecentric.boot.admin.client.config.SpringBootAdminClientAutoConfiguration # 禁用 Spring Boot Admin 的 Client 的自动配置
   datasource:
     druid: # Druid 【监控】相关的全局配置
       web-stat-filter:
@@ -25,8 +26,8 @@ spring:
             multi-statement-allow: true
     dynamic: # 多数据源配置
       druid: # Druid 【连接池】相关的全局配置
-        initial-size: 5 # 初始连接数
-        min-idle: 10 # 最小连接池数量
+        initial-size: 1 # 初始连接数
+        min-idle: 1 # 最小连接池数量
         max-active: 20 # 最大连接池数量
         max-wait: 600000 # 配置获取连接等待超时的时间，单位：毫秒
         time-between-eviction-runs-millis: 60000 # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位：毫秒
@@ -69,14 +70,6 @@ spring:
 #    password: 123456 # 密码，建议生产环境开启
 
 --- #################### MQ 消息队列相关配置 ####################
-spring:
-  cloud:
-    stream:
-      rocketmq:
-        # RocketMQ Binder 配置项，对应 RocketMQBinderConfigurationProperties 类
-        binder:
-          name-server: 127.0.0.1:9876 # RocketMQ Namesrv 地址
-      binding-retry-interval: 7200 # 消息绑定重试间隔时间，单位：秒，默认为 30 秒。考虑到本地可能不启动 RocketMQ 服务，设置为 2 小时
 
 --- #################### 定时任务相关配置 ####################
 

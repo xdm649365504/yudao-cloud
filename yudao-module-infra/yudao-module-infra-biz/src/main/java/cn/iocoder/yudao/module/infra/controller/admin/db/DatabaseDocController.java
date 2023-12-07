@@ -13,9 +13,9 @@ import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourcePrope
 import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceProperties;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -147,7 +147,7 @@ public class DatabaseDocController {
      */
     private static ProcessConfig buildProcessConfig() {
         return ProcessConfig.builder()
-                .ignoreTablePrefix(Arrays.asList("QRTZ_", "ACT_")) // 忽略表前缀
+                .ignoreTablePrefix(Arrays.asList("QRTZ_", "ACT_", "FLW_")) // 忽略表前缀
                 .build();
     }
 
