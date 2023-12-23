@@ -32,7 +32,7 @@ public class CodegenColumnRespVO {
 
     @Schema(description = "是否自增", requiredMode = Schema.RequiredMode.REQUIRED, example = "true")
     private Boolean autoIncrement;
-
+    //test
     @Schema(description = "排序", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private Integer ordinalPosition;
 
